@@ -7,9 +7,12 @@ Lightning-fast high-performance bulk DNS resolution tool written in [Go](http://
 
 Requirements
 ------------
+
+* Unbound caching DNS resolver + development libraries 
+
     - OSX: `brew update && brew install unbound`
 
-    - Linux: `sudo apt-get update && sudo apt-get install unbound libunbound-dev
+    - Ubuntu: `sudo apt-get update && sudo apt-get install unbound libunbound-dev
 
 Building
 --------
@@ -19,8 +22,14 @@ Examples
 --------
 The input is a newline-delimited list of domain names or URLs.  The output will be of the form `<domain> <ip1> <ip2> .. <ipN>`.
 
+Lookups (hostname -> IP):
+
     echo 'google.com' | ./bulkdns
 	google.com 74.125.239.34 74.125.239.46 74.125.239.38 74.125.239.33 74.125.239.36 74.125.239.35 74.125.239.40 74.125.239.39 74.125.239.32 74.125.239.37 74.125.239.41
+
+Reverse lookups (IP -> hostname):
+    echo 216.58.194.206 | ./bulkdns
+        216.58.194.206 sfo03s01-in-f14.1e100.net.
 
 Options
 -------
