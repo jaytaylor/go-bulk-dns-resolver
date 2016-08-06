@@ -12,11 +12,32 @@ Requirements
 
     - OSX: `brew update && brew install unbound`
 
-    - Ubuntu: `sudo apt-get update && sudo apt-get install unbound libunbound-dev
+    - Ubuntu: `sudo apt-get update && sudo apt-get install unbound libunbound-dev`
+
+Note: On Ubuntu you may want to backup /etc/resolv.conf beforehand, and then disable the unbound service as it will try to takeover all DNS on the machine by default.
+
+    sudo cp /etc/resolve.conf{,.bak}
+    sudo apt-get update && sudo apt-get install -y unbound libunbound-dev
+    sudo service unbound stop
+    sudo mv /etc/resolve.conf{.bak,}
+    sudo chmod a-x /etc/init.d/unbound
+    sudo mv /etc/init.d/unbound{,.disabled}
 
 Building
 --------
+
+Run:
+
     ./build.sh
+    
+Or if you want to do it manually:
+    
+     go get -u github.com/miekg/unbound
+     go get -u github.com/timtadh/getopt
+     cd $GOPATH/src/github.com/jaytaylor/go-bulk-dns-resolver
+     go build -o bulkdns *.go
+
+TODO: Update this project to be more go-standard!
 
 Examples
 --------
